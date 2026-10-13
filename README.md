@@ -225,9 +225,29 @@ Accuracy (%) = correct answers ÷ questions on held-out test sets; the same case
 Bold = best in the row; – = not run. * = an area Bev was not built for. Question-by-question results are on the
 Hugging Face model card.
 
+### How much of the work can you automate?
+
+![Share of decisions automated at a target accuracy](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/90813fcfe6d0e5c1e3b7a3a31687160fd7bc2bce/assets/automation.png)
+
+Hand over the most confident answers first: the share you can automate while those decisions stay at least 95% correct.
+Example: "76% at 95%" means 3 of every 4 decisions are taken automatically and at least 95% of them are right; the rest
+go to a person. Answers given with the same confidence are handed over together, so a system whose "100% sure" answers are
+only 94% right reaches 0% at the 95% target. Bev-Bench, typed decisions and Aegis 2.0, 10,238 answers per system.
+
+| System | Automated at 95% accuracy | at 90% | Accuracy on all answers |
+|---|---|---|---|
+| Bev-Large-C | 76% | 93% | 87.0% |
+| Bev-Pro-C | 69% | 90% | 86.0% |
+| Jev | 59% | 77% | 81.1% |
+| gpt-oss 120B | 0% | 74% | 81.4% |
+| Gemma 4 31B | 0% | 71% | 82.2% |
+| Mistral Large 4 | 0% | 0% | 78.1% |
+| Mistral Large 3 | 0% | 0% | 71.4% |
+| Nemotron 3 Super | 0% | 0% | 68.7% |
+
 ### Decisions on documents
 
-![Decisions on documents](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/6c529c4b20c42e75137c879413467ef287feb7c7/assets/benchmark.png)
+![Decisions on documents](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/90813fcfe6d0e5c1e3b7a3a31687160fd7bc2bce/assets/benchmark.png)
 
 | Test | Bev-Large-C | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
 |---|---|---|---|---|---|---|---|---|
@@ -239,7 +259,7 @@ Hugging Face model card.
 
 ### Public classification tests
 
-![Public classification tests](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/6c529c4b20c42e75137c879413467ef287feb7c7/assets/benchmark_classification.png)
+![Public classification tests](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/90813fcfe6d0e5c1e3b7a3a31687160fd7bc2bce/assets/benchmark_classification.png)
 
 | Test | Bev-Large-C | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
 |---|---|---|---|---|---|---|---|---|
@@ -252,7 +272,7 @@ Hugging Face model card.
 
 ### Areas Bev was not built for
 
-![Areas Bev was not built for](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/6c529c4b20c42e75137c879413467ef287feb7c7/assets/benchmark_outside.png)
+![Areas Bev was not built for](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/90813fcfe6d0e5c1e3b7a3a31687160fd7bc2bce/assets/benchmark_outside.png)
 
 | Test | Bev-Large-C | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
 |---|---|---|---|---|---|---|---|---|
@@ -268,7 +288,7 @@ Hugging Face model card.
 
 Calibration of Bev-Large-C (confidence = the probability of the answer given; ECE 0 is perfect):
 
-![Bev-Large-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/6c529c4b20c42e75137c879413467ef287feb7c7/assets/reliability.png)
+![Bev-Large-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/90813fcfe6d0e5c1e3b7a3a31687160fd7bc2bce/assets/reliability.png)
 
 | Test | Accuracy | Answered at confidence ≥ 0.8 | Accuracy of those | ECE |
 |---|---|---|---|---|
@@ -280,7 +300,7 @@ Calibration of Bev-Large-C (confidence = the probability of the answer given; EC
 
 Calibration of Bev-Pro-C (confidence = the probability of the answer given; ECE 0 is perfect):
 
-![Bev-Pro-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/de476fbad971075c3bb7c495cc6a0d2275f9e9a5/assets/reliability.png)
+![Bev-Pro-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/ecd7f8a2515501690a9b24c1a9eb7330f5cb72e4/assets/reliability.png)
 
 | Test | Accuracy | Answered at confidence ≥ 0.8 | Accuracy of those | ECE |
 |---|---|---|---|---|
