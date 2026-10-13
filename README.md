@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/fdb703de28fcdbbc939846db37e3e6a1b60ef4d5/assets/logo-512.png" alt="Bev logo: one decision, a probability for each option" width="96" height="96">
+
 # Bev
 
 **System One decision models with open weights.** Typed yes/no, choice and score decisions over any text, with a

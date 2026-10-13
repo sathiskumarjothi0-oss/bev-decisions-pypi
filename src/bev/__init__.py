@@ -21,4 +21,4 @@ from .schema import decide_as, questions_for
 
 __all__ = ["DEFAULT_MODEL", "PRO_MODEL", "Bev", "Router", "confidence", "decide_as", "evaluate", "evaluate_file", "gate", "load",
            "presets", "questions_for", "value"]
-__version__ = "0.2.1"
+__version__ = "0.2.2"
