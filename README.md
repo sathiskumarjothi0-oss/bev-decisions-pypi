@@ -171,7 +171,7 @@ Hugging Face model card.
 |---|---|---|---|---|---|---|---|
 | Bev-Bench (operations documents) | **91.9** | 87.9 | 83.7 | 74.6 | 91.1 | 88.9 | 70.6 |
 | Typed decisions | **79.2** | 73.8 | 72.0 | 68.0 | 68.8 | 75.0 | 62.7 |
-| Rules-Bench (rules shown) | 92.0 | **92.3** | – | – | – | – | – |
+| Rules-Bench (rules shown) | 92.0 | 92.3 | 83.1 | 81.4 | **94.5** | 91.6 | 82.7 |
 | Aegis 2.0 request safety | **78.2** | 71.5 | 70.5 | 66.9 | 69.5 | 73.1 | 69.3 |
 | JailbreakBench refusal | 84.0 | 83.5 | 77.5 | 62.0 | 68.0 | **87.5** | 65.0 |
 
