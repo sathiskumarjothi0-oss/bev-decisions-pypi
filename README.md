@@ -11,6 +11,7 @@ calibrated probability for every option, without generating text, on your own ma
 [![Python](https://img.shields.io/pypi/pyversions/bev-decisions)](https://pypi.org/project/bev-decisions/)
 [![Bev-Large-C](https://img.shields.io/badge/%F0%9F%A4%97%20Model-Bev--Large--C-yellow)](https://huggingface.co/sathiskumarjothi0/Bev-Large-C)
 [![Bev-Pro-C](https://img.shields.io/badge/%F0%9F%A4%97%20Model-Bev--Pro--C-yellow)](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C)
+[![Website](https://img.shields.io/badge/Website-bev.sjothi.com-23614f)](https://bev.sjothi.com/)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-sjothi-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/sjothi)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
 
