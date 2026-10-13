@@ -3,7 +3,7 @@
 # Bev
 
 **System One decision models with open weights.** Typed yes/no, choice and score decisions over any text, with a
-calibrated probability for every option, in one pass, on your own machines.
+calibrated probability for every option, without generating text, on your own machines.
 
 [![PyPI](https://img.shields.io/pypi/v/bev-decisions?label=PyPI)](https://pypi.org/project/bev-decisions/)
 [![Python](https://img.shields.io/pypi/pyversions/bev-decisions)](https://pypi.org/project/bev-decisions/)
@@ -74,7 +74,8 @@ More in [examples/](https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi/
 | `choice` | one of a set you define (`criteria`: key → description, up to 300) | `choice`, `confidence`, `probabilities` |
 | `score` | ordered levels (`criteria`: list or key → description, lowest first) | `label`, `score` (expected level: Σ index × probability), `confidence`, `probabilities` |
 
-Up to 16 questions per call share one read of the document. Keep each question narrow and combine the answers in your
+Up to 16 questions per call. Bev-Large-C reads the document once for all of them; Bev-Pro-C answers each question in
+its own scoring pass (questions with more than 26 options take a second round). Keep each question narrow and combine the answers in your
 code. Describe options in a few words that tell them apart, add an "other" option when nothing may fit, and keep
 the option order stable between calls.
 
