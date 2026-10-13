@@ -1,0 +1,59 @@
+[project]
+name = "bev-decisions"
+version = "0.2.0"
+description = "Bev: System One decision models with open weights. Typed yes/no, choice and score decisions with calibrated probabilities"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Dr. Sathiskumar JOTHI" }]
+keywords = ["decision-model", "system-one", "typed-decisions", "calibration", "classification", "routing", "guardrails",
+            "triage", "open-weights"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Text Processing :: Linguistic",
+]
+dependencies = ["torch>=2.4", "transformers>=4.48", "safetensors>=0.4", "numpy", "huggingface_hub>=0.25"]
+
+[project.optional-dependencies]
+pro = ["peft>=0.13", "accelerate>=1.0"]
+serve = ["fastapi>=0.110", "uvicorn>=0.29"]
+mcp = ["mcp>=1.2"]
+structured = ["pydantic>=2"]
+all = ["peft>=0.13", "accelerate>=1.0", "fastapi>=0.110", "uvicorn>=0.29", "mcp>=1.2", "pydantic>=2"]
+dev = ["pytest>=8", "httpx>=0.27", "ruff>=0.6"]
+
+[project.scripts]
+bev = "bev.cli:main"
+
+[project.urls]
+Homepage = "https://huggingface.co/sathiskumarjothi0/Bev-Pro-C"
+Repository = "https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi"
+Funding = "https://www.buymeacoffee.com/sjothi"
+Issues = "https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi/issues"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 140
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["tests"]

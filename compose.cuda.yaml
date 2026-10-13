@@ -1,0 +1,14 @@
+# NVIDIA GPU server (Bev-Pro-C):  docker compose -f compose.cuda.yaml up
+services:
+  bev:
+    build: {context: ., dockerfile: docker/Dockerfile.cuda}
+    ports: ["127.0.0.1:8000:8000"]
+    environment:
+      BEV_MODEL: ${BEV_MODEL:-sathiskumarjothi0/Bev-Pro-C}
+    volumes: ["hf-cache:/root/.cache/huggingface"]
+    deploy:
+      resources:
+        reservations:
+          devices: [{driver: nvidia, count: 1, capabilities: [gpu]}]
+volumes:
+  hf-cache:

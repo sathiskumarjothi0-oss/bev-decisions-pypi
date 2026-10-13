@@ -1,0 +1,10 @@
+# CPU server (Bev-Large models):  docker compose up
+services:
+  bev:
+    build: .
+    ports: ["127.0.0.1:8000:8000"]
+    environment:
+      BEV_MODEL: ${BEV_MODEL:-sathiskumarjothi0/Bev-Large-C}
+    volumes: ["hf-cache:/root/.cache/huggingface"]
+volumes:
+  hf-cache:
