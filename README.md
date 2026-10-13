@@ -227,7 +227,7 @@ Hugging Face model card.
 
 ### Decisions on documents
 
-![Decisions on documents](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/4ee146cf3aef4c9daf1c7514654847061ceca8b8/assets/benchmark.png)
+![Decisions on documents](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/6c529c4b20c42e75137c879413467ef287feb7c7/assets/benchmark.png)
 
 | Test | Bev-Large-C | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
 |---|---|---|---|---|---|---|---|---|
@@ -239,7 +239,7 @@ Hugging Face model card.
 
 ### Public classification tests
 
-![Public classification tests](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/4ee146cf3aef4c9daf1c7514654847061ceca8b8/assets/benchmark_classification.png)
+![Public classification tests](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/6c529c4b20c42e75137c879413467ef287feb7c7/assets/benchmark_classification.png)
 
 | Test | Bev-Large-C | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
 |---|---|---|---|---|---|---|---|---|
@@ -252,7 +252,7 @@ Hugging Face model card.
 
 ### Areas Bev was not built for
 
-![Areas Bev was not built for](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/4ee146cf3aef4c9daf1c7514654847061ceca8b8/assets/benchmark_outside.png)
+![Areas Bev was not built for](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/6c529c4b20c42e75137c879413467ef287feb7c7/assets/benchmark_outside.png)
 
 | Test | Bev-Large-C | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
 |---|---|---|---|---|---|---|---|---|
@@ -268,7 +268,7 @@ Hugging Face model card.
 
 Calibration of Bev-Large-C (confidence = the probability of the answer given; ECE 0 is perfect):
 
-![Bev-Large-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/4ee146cf3aef4c9daf1c7514654847061ceca8b8/assets/reliability.png)
+![Bev-Large-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/6c529c4b20c42e75137c879413467ef287feb7c7/assets/reliability.png)
 
 | Test | Accuracy | Answered at confidence ≥ 0.8 | Accuracy of those | ECE |
 |---|---|---|---|---|
@@ -280,7 +280,7 @@ Calibration of Bev-Large-C (confidence = the probability of the answer given; EC
 
 Calibration of Bev-Pro-C (confidence = the probability of the answer given; ECE 0 is perfect):
 
-![Bev-Pro-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/7355373f1bed3c2649a23c42ef4f4cd0e186e5a4/assets/reliability.png)
+![Bev-Pro-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/de476fbad971075c3bb7c495cc6a0d2275f9e9a5/assets/reliability.png)
 
 | Test | Accuracy | Answered at confidence ≥ 0.8 | Accuracy of those | ECE |
 |---|---|---|---|---|
