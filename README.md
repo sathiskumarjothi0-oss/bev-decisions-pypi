@@ -165,7 +165,7 @@ Hugging Face model card.
 
 ### Decisions on documents
 
-![Decisions on documents](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/main/assets/benchmark.png)
+![Decisions on documents](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/077978207b35fe22a96dd86320b449cbbccf14ce/assets/benchmark.png)
 
 | Test | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
 |---|---|---|---|---|---|---|---|
@@ -177,7 +177,7 @@ Hugging Face model card.
 
 ### Public classification tests
 
-![Public classification tests](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/main/assets/benchmark_classification.png)
+![Public classification tests](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/077978207b35fe22a96dd86320b449cbbccf14ce/assets/benchmark_classification.png)
 
 | Test | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
 |---|---|---|---|---|---|---|---|
@@ -190,7 +190,7 @@ Hugging Face model card.
 
 ### Areas Bev was not built for
 
-![Areas Bev was not built for](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/main/assets/benchmark_outside.png)
+![Areas Bev was not built for](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/077978207b35fe22a96dd86320b449cbbccf14ce/assets/benchmark_outside.png)
 
 | Test | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
 |---|---|---|---|---|---|---|---|
@@ -206,7 +206,7 @@ Hugging Face model card.
 
 Calibration of Bev-Pro-C (confidence = the probability of the answer given; ECE 0 is perfect):
 
-![Bev-Pro-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/main/assets/reliability.png)
+![Bev-Pro-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/077978207b35fe22a96dd86320b449cbbccf14ce/assets/reliability.png)
 
 | Test | Accuracy | Answered at confidence ≥ 0.8 | Accuracy of those | ECE |
 |---|---|---|---|---|
