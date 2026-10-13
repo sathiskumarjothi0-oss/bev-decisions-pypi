@@ -1,6 +1,6 @@
 # Publishes to PyPI when a GitHub release is published (tag vX.Y.Z), using PyPI trusted publishing: no token is stored.
-# One-time setup on pypi.org: project bev-decisions -> Publishing -> add a trusted publisher for this repository,
-# workflow "release.yml", environment "pypi".
+# One-time setup on pypi.org: https://pypi.org/manage/project/bev-decisions/settings/publishing/ -> add a GitHub
+# trusted publisher: owner sathiskumarjothi0-oss, repository bev-decisions-pypi, workflow release.yml, environment pypi.
 name: Release
 on:
   release: {types: [published]}
@@ -15,3 +15,5 @@ jobs:
         with: {python-version: "3.12"}
       - run: pip install build && python -m build
       - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          skip-existing: true   # a version already on PyPI (for example uploaded by hand) is left as it is
