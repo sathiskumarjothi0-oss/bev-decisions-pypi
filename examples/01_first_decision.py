@@ -7,7 +7,7 @@ import os
 
 import bev
 
-model = bev.load(os.environ.get("BEV_MODEL") or bev.PRO_MODEL)  # downloads once, then works offline
+model = bev.load(os.environ.get("BEV_MODEL") or bev.DEFAULT_MODEL)  # downloads once, then works offline
 
 answers = model.decide("I was charged twice for my order, please refund one payment.",
                        {"refund": {"type": "noul", "instructions": "Does the customer ask for a refund?"}})

@@ -7,6 +7,7 @@ calibrated probability for every option, without generating text, on your own ma
 
 [![PyPI](https://img.shields.io/pypi/v/bev-decisions?label=PyPI)](https://pypi.org/project/bev-decisions/)
 [![Python](https://img.shields.io/pypi/pyversions/bev-decisions)](https://pypi.org/project/bev-decisions/)
+[![Bev-Large-C](https://img.shields.io/badge/%F0%9F%A4%97%20Model-Bev--Large--C-yellow)](https://huggingface.co/sathiskumarjothi0/Bev-Large-C)
 [![Bev-Pro-C](https://img.shields.io/badge/%F0%9F%A4%97%20Model-Bev--Pro--C-yellow)](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-sjothi-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/sjothi)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -20,15 +21,15 @@ your documents never leave your machines.
 
 | Model | Size | Runs on | Best for | Status |
 |---|---|---|---|---|
-| Bev-Large-C | 0.4B (ModernBERT-large base) | laptop CPU/GPU, edge boxes, any GPU | operations documents, logs and alerts, counting, amounts and limits, ticket routing, request safety | coming soon |
+| [Bev-Large-C](https://huggingface.co/sathiskumarjothi0/Bev-Large-C) | 0.4B (ModernBERT-large base) | laptop CPU/GPU, edge boxes, any GPU | operations documents, logs and alerts, counting, amounts and limits, ticket routing, request safety | available |
 | [Bev-Pro-C](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C) | 26B (Gemma 4 26B-A4B base) | one GPU with about 60 GB | knowledge-heavy decisions: contracts, finance topics, large intent sets, dates and payment status | available |
 
 
 ## Installation
 
 ```bash
-python -m pip install "bev-decisions[pro]"     # Bev-Pro-C (GPU with about 60 GB)
-python -m pip install bev-decisions            # Bev-Large-C (laptop or any GPU)
+python -m pip install bev-decisions            # Bev-Large-C: laptop CPU or any GPU
+python -m pip install "bev-decisions[pro]"     # adds Bev-Pro-C: one GPU with about 60 GB
 ```
 
 Python 3.10 or newer. The first `bev.load()` downloads the model from Hugging Face and caches it; after that it works
@@ -47,7 +48,7 @@ offline. Optional extras:
 ```python
 import bev
 
-model = bev.load(bev.PRO_MODEL)   # sathiskumarjothi0/Bev-Pro-C
+model = bev.load()   # Bev-Large-C (laptop or GPU); bev.load(bev.PRO_MODEL) for Bev-Pro-C (large GPU)
 
 answers = model.decide(
     "Subject: Charged twice for order 88412. I was billed $49.99 twice on 3 October. Please refund one payment today, it's urgent.",
@@ -64,7 +65,64 @@ answers["urgent"]    # {"noul": P(yes), "probabilities": {"true": ..., "false": 
 answers["severity"]  # {"label": ..., "score": expected level, "confidence": ..., "probabilities": {...}}
 ```
 
-More in [examples/](https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi/tree/main/examples/): ten short scripts from a first yes/no question to an HTTP client.
+More in [examples/](https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi/tree/main/examples/): thirteen short scripts, from a first yes/no question to complete automations.
+
+## Run with or without a GPU
+
+`bev.load()` picks the best device it finds: an NVIDIA GPU (`cuda`), an Apple Silicon GPU (`mps`), otherwise the CPU.
+Choose one yourself with `device=`:
+
+```python
+model = bev.load(device="cpu")                    # Bev-Large-C, no GPU needed
+model = bev.load(device="cuda")                   # Bev-Large-C on an NVIDIA GPU
+model = bev.load(device="mps")                    # Bev-Large-C on an Apple Silicon GPU
+pro = bev.load(bev.PRO_MODEL, device="cuda")      # Bev-Pro-C: NVIDIA GPU with about 60 GB
+```
+
+```bash
+bev "I was charged twice, please refund" --noul "Does the customer ask for a refund?" --device cpu
+```
+
+| Bev-Large-C, measured on an Apple M4 Pro laptop | First load | One document with 3 questions |
+|---|---|---|
+| CPU only | about 25 s | about 0.18 s |
+| Apple GPU (`mps`) | about 22 s | about 0.05 s |
+
+Bev-Pro-C needs a GPU with about 60 GB; without one, use Bev-Large-C, or route mode (below) to send only the unsure
+answers to a GPU machine.
+
+## Use cases
+
+| Use case | Example questions | Where the evidence is |
+|---|---|---|
+| Support inbox triage | which team (choice), urgent? (yes/no), customer sentiment (score) | Bev-Bench ticket questions; support intents |
+| Request safety and guardrails | is this request harmful? is it a jailbreak attempt? | Aegis 2.0 and JailbreakBench |
+| AI agents: tool dispatch and checks | does this need a tool? which tool? does the action move money or delete data? (MCP: `bev mcp`) | typed decisions |
+| Model routing | which handler: rules, a small model, a large LLM or a person? | typed decisions |
+| Security and operations logs | attack category, failed logins above a number, severity, outage root cause | Bev-Bench security and alert questions |
+| Back office documents | invoice total over the approval limit? | Bev-Bench invoice questions |
+| Contract and policy review | does this clause look unfair to the customer? which policy rule applies? | unfair contract terms; Rules-Bench |
+| Reviews and content moderation | review sentiment, toxic comment? | product reviews; toxic comments |
+
+## Automation examples
+
+Complete scripts you can run and adapt (they use Bev-Large-C, so a laptop is enough):
+
+| Script | What it automates |
+|---|---|
+| [11_automation_support_inbox.py](https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi/blob/main/examples/11_automation_support_inbox.py) | reads a folder of emails, routes each to a team when confident, flags urgent ones, writes `routing.csv`; the rest go to a person |
+| [12_automation_invoice_approval.py](https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi/blob/main/examples/12_automation_invoice_approval.py) | approves invoices clearly under the limit automatically; anything over the limit or unsure goes to a manager |
+| [13_automation_agent_guard.py](https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi/blob/main/examples/13_automation_agent_guard.py) | checks an AI agent's proposed action: harmful requests are refused, actions that move money, delete data or contact people wait for a person |
+
+```python
+# the pattern behind all three: ask, gate on confidence, let your code decide
+answers = model.decide(email_text, bev.presets.get("ticket_triage"))
+sure, review = bev.gate(answers, threshold=0.8)
+if "department" in sure:
+    route_to(sure["department"])
+else:
+    send_to_person(email_text)
+```
 
 ## Decision primitives
 
@@ -99,7 +157,7 @@ result = router.decide(text, questions)
 result["answers"], result["routing"]                    # routing: {"team": "fast", "urgent": "strong"}
 ```
 
-Modes: `"cascade"` (default), `"fast"`, `"strong"`. Route mode needs Bev-Large-C (coming soon).
+Modes: `"cascade"` (default), `"fast"`, `"strong"`.
 
 ## Schema-driven decisions
 
@@ -166,48 +224,60 @@ Hugging Face model card.
 
 ### Decisions on documents
 
-![Decisions on documents](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/077978207b35fe22a96dd86320b449cbbccf14ce/assets/benchmark.png)
+![Decisions on documents](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/4ee146cf3aef4c9daf1c7514654847061ceca8b8/assets/benchmark.png)
 
-| Test | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
-|---|---|---|---|---|---|---|---|
-| Bev-Bench (operations documents) | **91.9** | 87.9 | 83.7 | 74.6 | 91.1 | 88.9 | 70.6 |
-| Typed decisions | **79.2** | 73.8 | 72.0 | 68.0 | 68.8 | 75.0 | 62.7 |
-| Rules-Bench (rules shown) | 92.0 | 92.3 | 83.1 | 81.4 | **94.5** | 91.6 | 82.7 |
-| Aegis 2.0 request safety | **78.2** | 71.5 | 70.5 | 66.9 | 69.5 | 73.1 | 69.3 |
-| JailbreakBench refusal | 84.0 | 83.5 | 77.5 | 62.0 | 68.0 | **87.5** | 65.0 |
+| Test | Bev-Large-C | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
+|---|---|---|---|---|---|---|---|---|
+| Bev-Bench (operations documents) | **93.0** | 91.9 | 87.9 | 83.7 | 74.6 | 91.1 | 88.9 | 70.6 |
+| Typed decisions | 75.8 | **79.2** | 73.8 | 72.0 | 68.0 | 68.8 | 75.0 | 62.7 |
+| Rules-Bench (rules shown) | 85.6 | 92.0 | 92.3 | 83.1 | 81.4 | **94.5** | 91.6 | 82.7 |
+| Aegis 2.0 request safety | **82.3** | 78.2 | 71.5 | 70.5 | 66.9 | 69.5 | 73.1 | 69.3 |
+| JailbreakBench refusal | 84.5 | 84.0 | 83.5 | 77.5 | 62.0 | 68.0 | **87.5** | 65.0 |
 
 ### Public classification tests
 
-![Public classification tests](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/077978207b35fe22a96dd86320b449cbbccf14ce/assets/benchmark_classification.png)
+![Public classification tests](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/4ee146cf3aef4c9daf1c7514654847061ceca8b8/assets/benchmark_classification.png)
 
-| Test | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
-|---|---|---|---|---|---|---|---|
-| AG News | 90.6 | **91.8** | 90.8 | 88.8 | 88.8 | **91.8** | 87.8 |
-| Emotion | 56.2 | 57.6 | 55.8 | 55.6 | **57.8** | 55.4 | 50.2 |
-| Banking77 (77 intents) | 70.6 | 79.2 | 75.8 | 71.2 | **81.0** | 78.8 | 69.2 |
-| SST-5 (5-level sentiment) | 51.8 | **56.8** | 51.4 | 49.4 | 49.6 | 53.2 | 46.8 |
-| XNLI (English) | 86.4 | **89.2** | 84.8 | 77.6 | 80.2 | **89.2** | 75.0 |
-| MASSIVE intents | 74.8 | 80.8 | 78.4 | 75.2 | 81.6 | **83.8** | 69.4 |
+| Test | Bev-Large-C | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
+|---|---|---|---|---|---|---|---|---|
+| AG News | 86.6 | 90.6 | **91.8** | 90.8 | 88.8 | 88.8 | **91.8** | 87.8 |
+| Emotion | 53.2 | 56.2 | 57.6 | 55.8 | 55.6 | **57.8** | 55.4 | 50.2 |
+| Banking77 (77 intents) | 63.6 | 70.6 | 79.2 | 75.8 | 71.2 | **81.0** | 78.8 | 69.2 |
+| SST-5 (5-level sentiment) | 33.2 | 51.8 | **56.8** | 51.4 | 49.4 | 49.6 | 53.2 | 46.8 |
+| XNLI (English) | 84.6 | 86.4 | **89.2** | 84.8 | 77.6 | 80.2 | **89.2** | 75.0 |
+| MASSIVE intents | 59.4 | 74.8 | 80.8 | 78.4 | 75.2 | 81.6 | **83.8** | 69.4 |
 
 ### Areas Bev was not built for
 
-![Areas Bev was not built for](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/077978207b35fe22a96dd86320b449cbbccf14ce/assets/benchmark_outside.png)
+![Areas Bev was not built for](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/4ee146cf3aef4c9daf1c7514654847061ceca8b8/assets/benchmark_outside.png)
 
-| Test | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
-|---|---|---|---|---|---|---|---|
-| Product reviews* | 96.4 | 96.4 | 96.4 | 96.6 | 95.4 | **97.2** | 94.8 |
-| Unfair contract terms* | **76.0** | 62.0 | 54.6 | 52.8 | 47.6 | 74.4 | 44.0 |
-| Financial-news sentiment* | 59.2 | 66.4 | 64.0 | 50.4 | 68.4 | **71.2** | 64.0 |
-| Poem sentiment* | **65.1** | 44.5 | 42.6 | 32.1 | 59.8 | 62.7 | 45.5 |
-| Support intents* | 88.0 | 89.8 | 85.4 | 86.2 | 90.0 | **90.4** | 76.6 |
-| Toxic comments* | 79.2 | 78.8 | 68.0 | 73.0 | **80.8** | 76.4 | 69.6 |
-| Financial-news topics* | **69.8** | 65.0 | 61.8 | 61.6 | 63.4 | 64.2 | 57.2 |
-| Legal case holdings* | 71.2 | **77.6** | 69.2 | 72.2 | 61.2 | 71.6 | 55.0 |
+| Test | Bev-Large-C | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
+|---|---|---|---|---|---|---|---|---|
+| Product reviews* | 93.2 | 96.4 | 96.4 | 96.4 | 96.6 | 95.4 | **97.2** | 94.8 |
+| Unfair contract terms* | 65.6 | **76.0** | 62.0 | 54.6 | 52.8 | 47.6 | 74.4 | 44.0 |
+| Financial-news sentiment* | 69.8 | 59.2 | 66.4 | 64.0 | 50.4 | 68.4 | **71.2** | 64.0 |
+| Poem sentiment* | **71.8** | 65.1 | 44.5 | 42.6 | 32.1 | 59.8 | 62.7 | 45.5 |
+| Support intents* | 85.6 | 88.0 | 89.8 | 85.4 | 86.2 | 90.0 | **90.4** | 76.6 |
+| Toxic comments* | 63.0 | 79.2 | 78.8 | 68.0 | 73.0 | **80.8** | 76.4 | 69.6 |
+| Financial-news topics* | 37.8 | **69.8** | 65.0 | 61.8 | 61.6 | 63.4 | 64.2 | 57.2 |
+| Legal case holdings* | 42.0 | 71.2 | **77.6** | 69.2 | 72.2 | 61.2 | 71.6 | 55.0 |
 
+
+Calibration of Bev-Large-C (confidence = the probability of the answer given; ECE 0 is perfect):
+
+![Bev-Large-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/4ee146cf3aef4c9daf1c7514654847061ceca8b8/assets/reliability.png)
+
+| Test | Accuracy | Answered at confidence ≥ 0.8 | Accuracy of those | ECE |
+|---|---|---|---|---|
+| Bev-Bench (operations documents) | 93.0% | 86.9% | 98.9% | 0.029 |
+| Typed decisions | 75.8% | 14.0% | 97.1% | 0.170 |
+| Rules-Bench (rules shown) | 85.6% | 76.8% | 94.7% | 0.034 |
+| Aegis 2.0 request safety | 82.3% | 57.0% | 94.2% | 0.034 |
+| Product reviews | 93.2% | 84.2% | 96.9% | 0.024 |
 
 Calibration of Bev-Pro-C (confidence = the probability of the answer given; ECE 0 is perfect):
 
-![Bev-Pro-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/077978207b35fe22a96dd86320b449cbbccf14ce/assets/reliability.png)
+![Bev-Pro-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/7355373f1bed3c2649a23c42ef4f4cd0e186e5a4/assets/reliability.png)
 
 | Test | Accuracy | Answered at confidence ≥ 0.8 | Accuracy of those | ECE |
 |---|---|---|---|---|

@@ -8,7 +8,7 @@ import os
 
 import bev
 
-model = bev.load(os.environ.get("BEV_MODEL") or bev.PRO_MODEL)
+model = bev.load(os.environ.get("BEV_MODEL") or bev.DEFAULT_MODEL)
 
 answers = model.decide("Hi, can you tell me if the premium plan includes phone support? Thanks", {
     "team": {"type": "choice", "instructions": "Which team should handle this message?",

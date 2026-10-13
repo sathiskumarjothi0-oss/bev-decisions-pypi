@@ -8,7 +8,7 @@ import os
 
 import bev
 
-model = bev.load(os.environ.get("BEV_MODEL") or bev.PRO_MODEL)
+model = bev.load(os.environ.get("BEV_MODEL") or bev.DEFAULT_MODEL)
 
 answers = model.decide(
     "The app crashes every time I open the settings page since the last update.",

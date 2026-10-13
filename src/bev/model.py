@@ -23,7 +23,7 @@ def _resolve(path_or_repo: str | Path) -> Path:
         return Path(snapshot_download(str(path_or_repo)))
     except (RepositoryNotFoundError, GatedRepoError) as e:
         raise RuntimeError(f"model '{path_or_repo}' is not available on Hugging Face (not released yet, private, or misspelled). "
-                           f"Released models: {PRO_MODEL} (GPU, ~60 GB) and {DEFAULT_MODEL} (laptop or GPU) once published.") from e
+                           f"Released models: {PRO_MODEL} (GPU, ~60 GB) and {DEFAULT_MODEL} (laptop or GPU).") from e
 
 
 def _item(state: Any, questions: dict[str, dict]) -> dict:

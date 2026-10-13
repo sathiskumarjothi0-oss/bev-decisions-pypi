@@ -1,6 +1,6 @@
 [project]
 name = "bev-decisions"
-version = "0.2.0"
+version = "0.2.1"
 description = "Bev: System One decision models with open weights. Typed yes/no, choice and score decisions with calibrated probabilities"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -36,7 +36,7 @@ dev = ["pytest>=8", "httpx>=0.27", "ruff>=0.6"]
 bev = "bev.cli:main"
 
 [project.urls]
-Homepage = "https://huggingface.co/sathiskumarjothi0/Bev-Pro-C"
+Homepage = "https://bev.sjothi.com"
 Repository = "https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi"
 Funding = "https://www.buymeacoffee.com/sjothi"
 Issues = "https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi/issues"

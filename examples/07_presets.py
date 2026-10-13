@@ -8,7 +8,7 @@ import os
 import bev
 
 print(bev.presets.names())
-model = bev.load(os.environ.get("BEV_MODEL") or bev.PRO_MODEL)
+model = bev.load(os.environ.get("BEV_MODEL") or bev.DEFAULT_MODEL)
 log = "sshd[2211]: Failed password for root from 203.0.113.7 port 52211 (x47 in 2 minutes)"
 for name, a in model.decide(log, bev.presets.get("security_log")).items():
     print(name, bev.value(a), round(bev.confidence(a), 3))

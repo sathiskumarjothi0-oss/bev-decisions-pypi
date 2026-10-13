@@ -8,7 +8,7 @@ import os
 
 import bev
 
-model = bev.load(os.environ.get("BEV_MODEL") or bev.PRO_MODEL)
+model = bev.load(os.environ.get("BEV_MODEL") or bev.DEFAULT_MODEL)
 
 answers = model.decide(
     "ALERT checkout-api p99 latency 4.8 s (SLO 800 ms) for 25 minutes; error rate 12%; customers cannot pay.",

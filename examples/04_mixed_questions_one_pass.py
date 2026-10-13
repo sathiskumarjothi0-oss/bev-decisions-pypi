@@ -8,7 +8,7 @@ import os
 
 import bev
 
-model = bev.load(os.environ.get("BEV_MODEL") or bev.PRO_MODEL)
+model = bev.load(os.environ.get("BEV_MODEL") or bev.DEFAULT_MODEL)
 
 ticket = """From: maria@example.com
 Subject: Charged twice for order 88412

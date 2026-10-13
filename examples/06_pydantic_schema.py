@@ -18,5 +18,5 @@ class Ticket(BaseModel):
     team: Literal["billing", "tech", "sales"] = Field(description="Which team should handle this ticket?")
 
 
-model = bev.load(os.environ.get("BEV_MODEL") or bev.PRO_MODEL)
+model = bev.load(os.environ.get("BEV_MODEL") or bev.DEFAULT_MODEL)
 print(bev.decide_as(model, "Charged twice, refund one payment today please!", Ticket))

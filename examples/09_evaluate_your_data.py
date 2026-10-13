@@ -9,7 +9,7 @@ import os
 
 import bev
 
-model = bev.load(os.environ.get("BEV_MODEL") or bev.PRO_MODEL)
+model = bev.load(os.environ.get("BEV_MODEL") or bev.DEFAULT_MODEL)
 q = {"refund": {"type": "noul", "instructions": "Does the customer ask for a refund?"}}
 cases = [{"state": "Please refund my last payment.", "questions": q, "labels": {"refund": True}},
          {"state": "How do I change my password?", "questions": q, "labels": {"refund": False}},
