@@ -86,10 +86,12 @@ pro = bev.load(bev.PRO_MODEL, device="cuda")      # Bev-Pro-C: NVIDIA GPU with a
 bev "I was charged twice, please refund" --noul "Does the customer ask for a refund?" --device cpu
 ```
 
-| Bev-Large-C, measured on an Apple M4 Pro laptop | First load | One document with 3 questions |
+| Measured, one document with 3 questions | First load | Time |
 |---|---|---|
-| CPU only | about 25 s | about 0.18 s |
-| Apple GPU (`mps`) | about 22 s | about 0.05 s |
+| Bev-Large-C, Apple M4 Pro laptop, CPU only | about 25 s | about 0.18 s |
+| Bev-Large-C, Apple M4 Pro laptop, GPU (`mps`) | about 22 s | about 0.05 s |
+| Bev-Large-C, one NVIDIA H200 GPU | about 32 s | about 0.015 s |
+| Bev-Pro-C, one NVIDIA H200 GPU | about 54 s (after the 52 GB download) | about 0.07 s |
 
 Bev-Pro-C needs a GPU with about 60 GB; without one, use Bev-Large-C, or route mode (below) to send only the unsure
 answers to a GPU machine.
@@ -227,7 +229,7 @@ Hugging Face model card.
 
 ### How much of the work can you automate?
 
-![Share of decisions automated at a target accuracy](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/90813fcfe6d0e5c1e3b7a3a31687160fd7bc2bce/assets/automation.png)
+![Share of decisions automated at a target accuracy](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/873deef01e7dc1f0ded491f8b7f2c82b982cd489/assets/automation.png)
 
 Hand over the most confident answers first: the share you can automate while those decisions stay at least 95% correct.
 Example: "76% at 95%" means 3 of every 4 decisions are taken automatically and at least 95% of them are right; the rest
@@ -245,9 +247,22 @@ only 94% right reaches 0% at the 95% target. Bev-Bench, typed decisions and Aegi
 | Mistral Large 3 | 0% | 0% | 71.4% |
 | Nemotron 3 Super | 0% | 0% | 68.7% |
 
+### Size and speed
+
+![Accuracy against model size](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/873deef01e7dc1f0ded491f8b7f2c82b982cd489/assets/size.png)
+
+Accuracy on the same 10,238 answers against total parameters (log scale), for every system with a published size:
+Bev-Large-C (0.4B) and Bev-Pro-C (25.8B) are more accurate than LLMs of 31B to 675B.
+
+![Time per decision](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/873deef01e7dc1f0ded491f8b7f2c82b982cd489/assets/speed.png)
+
+Bev, one document with 3 questions, package from PyPI: Bev-Large-C 4.9 ms per decision on one NVIDIA H200, 17 ms on an Apple M4 Pro laptop GPU, 60 ms on its CPU; Bev-Pro-C 22 ms on one H200.
+Jev and the LLMs were measured through their cloud APIs (median per decision, including network and queueing): Jev
+98 ms, the five LLMs 4.1 to 7.0 s.
+
 ### Decisions on documents
 
-![Decisions on documents](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/90813fcfe6d0e5c1e3b7a3a31687160fd7bc2bce/assets/benchmark.png)
+![Decisions on documents](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/873deef01e7dc1f0ded491f8b7f2c82b982cd489/assets/benchmark.png)
 
 | Test | Bev-Large-C | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
 |---|---|---|---|---|---|---|---|---|
@@ -259,7 +274,7 @@ only 94% right reaches 0% at the 95% target. Bev-Bench, typed decisions and Aegi
 
 ### Public classification tests
 
-![Public classification tests](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/90813fcfe6d0e5c1e3b7a3a31687160fd7bc2bce/assets/benchmark_classification.png)
+![Public classification tests](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/873deef01e7dc1f0ded491f8b7f2c82b982cd489/assets/benchmark_classification.png)
 
 | Test | Bev-Large-C | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
 |---|---|---|---|---|---|---|---|---|
@@ -272,7 +287,7 @@ only 94% right reaches 0% at the 95% target. Bev-Bench, typed decisions and Aegi
 
 ### Areas Bev was not built for
 
-![Areas Bev was not built for](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/90813fcfe6d0e5c1e3b7a3a31687160fd7bc2bce/assets/benchmark_outside.png)
+![Areas Bev was not built for](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/873deef01e7dc1f0ded491f8b7f2c82b982cd489/assets/benchmark_outside.png)
 
 | Test | Bev-Large-C | Bev-Pro-C | Jev | Mistral Large 4 | Mistral Large 3 | gpt-oss 120B | Gemma 4 31B | Nemotron 3 Super |
 |---|---|---|---|---|---|---|---|---|
@@ -288,7 +303,7 @@ only 94% right reaches 0% at the 95% target. Bev-Bench, typed decisions and Aegi
 
 Calibration of Bev-Large-C (confidence = the probability of the answer given; ECE 0 is perfect):
 
-![Bev-Large-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/90813fcfe6d0e5c1e3b7a3a31687160fd7bc2bce/assets/reliability.png)
+![Bev-Large-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Large-C/resolve/873deef01e7dc1f0ded491f8b7f2c82b982cd489/assets/reliability.png)
 
 | Test | Accuracy | Answered at confidence ≥ 0.8 | Accuracy of those | ECE |
 |---|---|---|---|---|
@@ -300,7 +315,7 @@ Calibration of Bev-Large-C (confidence = the probability of the answer given; EC
 
 Calibration of Bev-Pro-C (confidence = the probability of the answer given; ECE 0 is perfect):
 
-![Bev-Pro-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/ecd7f8a2515501690a9b24c1a9eb7330f5cb72e4/assets/reliability.png)
+![Bev-Pro-C calibration](https://huggingface.co/sathiskumarjothi0/Bev-Pro-C/resolve/bf5e11c6544d81f37463e0fc6f4ec727e503f74f/assets/reliability.png)
 
 | Test | Accuracy | Answered at confidence ≥ 0.8 | Accuracy of those | ECE |
 |---|---|---|---|---|
