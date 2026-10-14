@@ -35,6 +35,8 @@ python -m pip install bev-decisions            # Beveridge-Large-C: laptop CPU o
 python -m pip install "bev-decisions[pro]"     # adds Beveridge-Pro-C: one GPU with about 60 GB
 ```
 
+`pip install beveridge` installs the same package under the models' name (`import beveridge` or `import bev`).
+
 Python 3.10 or newer. The first `bev.load()` downloads the model from Hugging Face and caches it; after that it works
 offline. Optional extras:
 
