@@ -1,0 +1,21 @@
+# Publishes the alias package `beveridge` (folder beveridge/: pip install beveridge -> bev-decisions) to PyPI.
+# Started by hand only (Actions -> Release beveridge -> Run workflow), so normal releases of bev-decisions are not affected.
+# PyPI trusted publishing: owner sathiskumarjothi0-oss, repository bev-decisions-pypi, workflow release-beveridge.yml,
+# environment pypi (set up as a pending publisher for the new project "beveridge", 2026-10-14).
+name: Release beveridge
+on:
+  workflow_dispatch:
+jobs:
+  pypi:
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions: {id-token: write, contents: read}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: cp LICENSE beveridge/LICENSE && pip install build && python -m build beveridge
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: beveridge/dist
+          skip-existing: true

@@ -1,0 +1,32 @@
+[project]
+name = "beveridge"
+version = "0.2.4"
+description = "Beveridge: System One decision models with open weights. Alias of bev-decisions: pip install beveridge, import beveridge"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Dr. Sathiskumar JOTHI" }]
+keywords = ["decision-model", "system-one", "typed-decisions", "calibration", "classification", "open-weights"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = ["bev-decisions>=0.2.4"]
+
+[project.optional-dependencies]
+pro = ["bev-decisions[pro]>=0.2.4"]
+all = ["bev-decisions[all]>=0.2.4"]
+
+[project.urls]
+Homepage = "https://bev.sjothi.com"
+Repository = "https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
