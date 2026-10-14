@@ -1,4 +1,4 @@
-"""MCP server: let AI assistants and agents call Bev as a tool (Model Context Protocol, stdio).
+"""MCP server: let AI assistants and agents call Beveridge as a tool (Model Context Protocol, stdio).
 
     pip install "bev-decisions[mcp]"
     bev mcp [--model ...]

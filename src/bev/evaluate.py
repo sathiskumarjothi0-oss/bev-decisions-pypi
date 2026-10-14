@@ -1,4 +1,4 @@
-"""Evaluate Bev on your own labelled examples before relying on it (accuracy, calibration, confidence threshold).
+"""Evaluate Beveridge on your own labelled examples before relying on it (accuracy, calibration, confidence threshold).
 
     bev eval my_cases.jsonl [--model ...] [--threshold 0.8]
 

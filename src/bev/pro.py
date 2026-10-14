@@ -1,10 +1,10 @@
-"""Bev-Pro: a larger Bev built on Google Gemma 4 (Apache-2.0). Same questions and answers as Bev.
+"""Beveridge-Pro: a larger Beveridge built on Google Gemma 4 (Apache-2.0). Same questions and answers as Beveridge.
 
     import bev
-    pro = bev.load("sathiskumarjothi0/Bev-Pro-C")      # needs: pip install "bev-decisions[pro]" and a GPU with ~60 GB
+    pro = bev.load("sathiskumarjothi0/Beveridge-Pro-C")      # needs: pip install "bev-decisions[pro]" and a GPU with ~60 GB
     pro.decide(text, questions)
 
-A Bev-Pro folder holds bev_config.json (settings and calibration temperatures), the Gemma 4 model files and Bev's
+A Beveridge-Pro folder holds bev_config.json (settings and calibration temperatures), the Gemma 4 model files and Beveridge's
 decision weights (adapter/). Everything is loaded from that one folder or Hugging Face repository.
 """
 
@@ -29,7 +29,7 @@ def _options(q: dict) -> list[tuple[str, str]]:
 
 
 class BevPro:
-    """A loaded Bev-Pro model. Use bev.load(...) to create one."""
+    """A loaded Beveridge-Pro model. Use bev.load(...) to create one."""
 
     def __init__(self, folder: Path, device: str | None = None) -> None:
         import torch

@@ -1,4 +1,4 @@
-"""Call a self-hosted Bev server from any language; here with Python's standard library.
+"""Call a self-hosted Beveridge server from any language; here with Python's standard library.
 
     pip install "bev-decisions[serve]" && bev serve --port 8000      # in another terminal
     python examples/10_http_client.py

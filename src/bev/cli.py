@@ -1,11 +1,11 @@
-"""Command line for Bev.
+"""Command line for Beveridge.
 
     bev "I was charged twice, please refund" --noul "Does the customer ask for a refund?"
     bev --file ticket.txt --choice "Which team?" --options billing="payments, refunds" tech="bugs, outages"
     bev --file alert.txt --score "How severe is this?" --levels low medium high
     bev --file ticket.txt --preset ticket_triage
     bev --batch tickets.txt --preset ticket_triage --min-confidence 0.8      # one text per line
-    bev "..." --questions questions.json --pro                               # unsure answers go to Bev-Pro (GPU)
+    bev "..." --questions questions.json --pro                               # unsure answers go to Beveridge-Pro (GPU)
     bev presets                                   # list the ready-made question sets
     bev eval my_cases.jsonl [--threshold 0.8]     # accuracy and calibration on your own labelled examples
     bev serve [--host 127.0.0.1] [--port 8000]    # HTTP server   (pip install "bev-decisions[serve]")
@@ -85,7 +85,7 @@ def main() -> None:
     if len(sys.argv) > 1 and sys.argv[1] in ("serve", "mcp", "eval", "presets"):
         _sub(sys.argv[1:])
         return
-    ap = argparse.ArgumentParser(prog="bev", description="Ask Bev typed questions about a text. Subcommands: presets, eval, serve, mcp.")
+    ap = argparse.ArgumentParser(prog="bev", description="Ask Beveridge typed questions about a text. Subcommands: presets, eval, serve, mcp.")
     ap.add_argument("text", nargs="?", help="the text to decide about (or use --file / --batch)")
     ap.add_argument("--file", help="read the text from a file")
     ap.add_argument("--batch", help="a file with one text per line")
@@ -94,10 +94,10 @@ def main() -> None:
     ap.add_argument("--options", nargs="+", help="key=description for --choice")
     ap.add_argument("--score", help="a score question (with --levels)")
     ap.add_argument("--levels", nargs="+", help="score levels, lowest first")
-    ap.add_argument("--questions", help="a JSON file of questions in Bev's format")
+    ap.add_argument("--questions", help="a JSON file of questions in Beveridge's format")
     ap.add_argument("--preset", help="a ready-made question set (see: bev presets)")
     ap.add_argument("--min-confidence", type=float, default=None, help='mark answers below this confidence with "review": true')
-    ap.add_argument("--pro", action="store_true", help="send unsure answers to Bev-Pro (needs a GPU and bev-decisions[pro])")
+    ap.add_argument("--pro", action="store_true", help="send unsure answers to Beveridge-Pro (needs a GPU and bev-decisions[pro])")
     ap.add_argument("--model", default=None)
     ap.add_argument("--device", default=None)
     a = ap.parse_args()

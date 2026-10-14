@@ -1,7 +1,7 @@
 """Route questions between a fast model and a stronger one.
 
     from bev import Router
-    router = Router()                        # Bev-Large first; unsure answers go to Bev-Pro when it is available
+    router = Router()                        # Beveridge-Large first; unsure answers go to Beveridge-Pro when it is available
     result = router.decide(text, questions)
     result["answers"], result["routing"]     # routing: which model answered each question
 

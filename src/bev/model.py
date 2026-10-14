@@ -1,4 +1,4 @@
-"""Load Bev and answer typed questions locally. The network code is in bev/_core."""
+"""Load Beveridge and answer typed questions locally. The network code is in bev/_core."""
 
 from __future__ import annotations
 
@@ -7,8 +7,8 @@ from pathlib import Path
 from typing import Any
 
 MAX_QUESTIONS, MAX_OPTIONS = 16, 300
-DEFAULT_MODEL = "sathiskumarjothi0/Bev-Large-C"  # Hugging Face repo ids of the released models
-PRO_MODEL = "sathiskumarjothi0/Bev-Pro-C"
+DEFAULT_MODEL = "sathiskumarjothi0/Beveridge-Large-C"  # Hugging Face repo ids of the released models
+PRO_MODEL = "sathiskumarjothi0/Beveridge-Pro-C"
 TYPES = ("noul", "choice", "score")
 
 
@@ -72,7 +72,7 @@ def _format(item: dict, row: dict, questions: dict[str, dict]) -> dict:
 
 
 class Bev:
-    """A loaded Bev-Large model. Use bev.load(...) to create one."""
+    """A loaded Beveridge-Large model. Use bev.load(...) to create one."""
 
     def __init__(self, folder: Path, device: str | None = None) -> None:
         import torch
@@ -113,7 +113,7 @@ class Bev:
 
 
 def load(path_or_repo: str | Path = DEFAULT_MODEL, device: str | None = None):  # type: ignore[no-untyped-def]
-    """Load a Bev model from a local folder or a Hugging Face repo id: Bev-Large models (laptop or GPU) or Bev-Pro models
+    """Load a Beveridge model from a local folder or a Hugging Face repo id: Beveridge-Large models (laptop or GPU) or Beveridge-Pro models
     (GPU; pip install "bev-decisions[pro]"). device: "cuda", "mps" or "cpu" (default: best available)."""
     folder = _resolve(path_or_repo)
     if (folder / "bev_config.json").exists() or json.loads((folder / "config.json").read_text()).get("model_type") == "bev-pro":

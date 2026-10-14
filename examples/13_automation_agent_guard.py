@@ -1,4 +1,4 @@
-"""Automation: a guard in front of an AI agent. Before the agent acts, Bev answers plain yes/no questions about the
+"""Automation: a guard in front of an AI agent. Before the agent acts, Beveridge answers plain yes/no questions about the
 user's request and the action the agent proposes; your code decides what is allowed. Harmful requests are refused,
 actions that move money, delete things or contact people wait for a person, and everything else runs.
 (Agents that speak MCP can call the same checks as tools: pip install "bev-decisions[mcp]" && bev mcp.)

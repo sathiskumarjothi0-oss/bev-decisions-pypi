@@ -25,7 +25,7 @@ def questions_for(schema: type) -> dict[str, dict]:
     qs: dict[str, dict] = {}
     for name, f in schema.model_fields.items():  # type: ignore[attr-defined]
         if not f.description:
-            raise ValueError(f"field '{name}' needs a description: it is the question Bev is asked")
+            raise ValueError(f"field '{name}' needs a description: it is the question Beveridge is asked")
         t = f.annotation
         if t is bool:
             qs[name] = {"type": "noul", "instructions": f.description}

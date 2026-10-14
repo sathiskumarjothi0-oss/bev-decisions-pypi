@@ -1,4 +1,4 @@
-"""A fake model with Bev's interface, so the tests run without downloading weights."""
+"""A fake model with Beveridge's interface, so the tests run without downloading weights."""
 
 import pytest
 

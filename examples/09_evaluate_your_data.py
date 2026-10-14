@@ -1,4 +1,4 @@
-"""Measure Bev on your own labelled examples before relying on it: accuracy, calibration and the share of answers
+"""Measure Beveridge on your own labelled examples before relying on it: accuracy, calibration and the share of answers
 above a confidence threshold. Each case: {"state": ..., "questions": {...}, "labels": {name: answer}}.
 
     python examples/09_evaluate_your_data.py      # or: bev eval my_cases.jsonl --threshold 0.8

@@ -1,4 +1,4 @@
-"""Self-hosted HTTP server: run Bev on your own machine or server and call it from any language.
+"""Self-hosted HTTP server: run Beveridge on your own machine or server and call it from any language.
 
     pip install "bev-decisions[serve]"
     bev serve --port 8000 [--model ...] [--host 127.0.0.1]
@@ -29,7 +29,7 @@ def create_app(model: Any):  # type: ignore[no-untyped-def]
     class Batch(BaseModel):
         requests: list[Decide]
 
-    app = FastAPI(title="Bev", version="0.2")
+    app = FastAPI(title="Beveridge", version="0.2")
     lock = threading.Lock()
 
     def qs(r: Decide) -> dict:

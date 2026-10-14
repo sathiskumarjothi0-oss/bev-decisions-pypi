@@ -1,4 +1,4 @@
-"""Ready-made question sets, worded as in the question families Bev is tested on (Bev answers most reliably when a
+"""Ready-made question sets, worded as in the question families Beveridge is tested on (Beveridge answers most reliably when a
 question is phrased like these). Use them as they are or as a starting point.
 
     from bev import presets
@@ -6,7 +6,7 @@ question is phrased like these). Use them as they are or as a starting point.
     answers = model.decide(invoice_text, {"over_limit": presets.over_limit("$8,900")})
     presets.names()
 
-Not offered on purpose: invoice payment status and lateness against today's date (Bev-Large models are unreliable at
+Not offered on purpose: invoice payment status and lateness against today's date (Beveridge-Large models are unreliable at
 it; compute due dates in your own code).
 """
 

@@ -1,4 +1,4 @@
-"""A choice question: Bev picks one of the options you describe and gives a probability for each.
+"""A choice question: Beveridge picks one of the options you describe and gives a probability for each.
 Describe each option in a few words; the descriptions matter more than the keys.
 
     python examples/02_choice_question.py

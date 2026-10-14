@@ -1,7 +1,7 @@
-"""Bev: open-weight models that answer typed questions about a document with calibrated probabilities.
+"""Beveridge: open-weight models that answer typed questions about a document with calibrated probabilities.
 
     import bev
-    model = bev.load()                              # Bev-Large (laptop or GPU); bev.load(bev.PRO_MODEL) for Bev-Pro (GPU)
+    model = bev.load()                              # Beveridge-Large (laptop or GPU); bev.load(bev.PRO_MODEL) for Beveridge-Pro (GPU)
     answers = model.decide(
         "Invoice INV-2291. Total: $9,412.50. Approval limit: $8,900.",
         {"over_limit": bev.presets.over_limit("$8,900")},
@@ -21,4 +21,4 @@ from .schema import decide_as, questions_for
 
 __all__ = ["DEFAULT_MODEL", "PRO_MODEL", "Bev", "Router", "confidence", "decide_as", "evaluate", "evaluate_file", "gate", "load",
            "presets", "questions_for", "value"]
-__version__ = "0.2.3"
+__version__ = "0.2.4"

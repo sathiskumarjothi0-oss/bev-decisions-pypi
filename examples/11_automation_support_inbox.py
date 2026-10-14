@@ -21,7 +21,7 @@ SAMPLES = {
 folder = Path(sys.argv[1]) if len(sys.argv) > 1 else None
 messages = {p.name: p.read_text(errors="ignore") for p in sorted(folder.glob("*")) if p.suffix in (".txt", ".eml")} if folder else SAMPLES
 
-model = bev.load(os.environ.get("BEV_MODEL") or bev.DEFAULT_MODEL)   # Bev-Large-C: runs on a laptop CPU
+model = bev.load(os.environ.get("BEV_MODEL") or bev.DEFAULT_MODEL)   # Beveridge-Large-C: runs on a laptop CPU
 questions = bev.presets.get("ticket_triage")                         # department, urgent, sentiment
 results = model.decide_batch([(text, questions) for text in messages.values()], batch_size=8)
 

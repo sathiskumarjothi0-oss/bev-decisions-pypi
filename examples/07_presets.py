@@ -1,4 +1,4 @@
-"""Ready-made question sets, worded like the question families Bev is tested on.
+"""Ready-made question sets, worded like the question families Beveridge is tested on.
 
     python examples/07_presets.py
 """

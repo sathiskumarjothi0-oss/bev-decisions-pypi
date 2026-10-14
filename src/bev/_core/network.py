@@ -1,4 +1,4 @@
-"""The Bev-Large network (inference only).
+"""The Beveridge-Large network (inference only).
 
 A ModernBERT encoder reads the questions, their options and the document in one sequence; typed values (amounts, dates,
 times, numbers) are added to the token embeddings. Each question becomes a vector that gathers evidence from the
@@ -110,7 +110,7 @@ class Prompt:
 
 
 class BevNetwork(nn.Module):
-    """Bev-Large: ModernBERT-large encoder plus the decision layers. Build it from the encoder configuration that ships
+    """Beveridge-Large: ModernBERT-large encoder plus the decision layers. Build it from the encoder configuration that ships
     with the weights (no download), then load model.safetensors."""
 
     def __init__(self, encoder_dir: str) -> None:
