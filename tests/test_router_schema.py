@@ -37,3 +37,10 @@ def test_evaluate_reports_accuracy(fake):
     rep = bev.evaluate(fake, [{"state": "a", "questions": q, "labels": {"u": True}},
                               {"state": "b", "questions": q, "labels": {"u": False}}], threshold=0.8)
     assert rep["all"]["accuracy"] == 0.5
+
+
+def test_model_ids():
+    import bev
+
+    assert bev.WEB_MODEL == "sathiskumarjothi0/Beveridge-Pro-C-Web" and "WEB_MODEL" in bev.__all__
+    assert bev.__version__ == "0.2.5"

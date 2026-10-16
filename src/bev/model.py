@@ -9,6 +9,7 @@ from typing import Any
 MAX_QUESTIONS, MAX_OPTIONS = 16, 300
 DEFAULT_MODEL = "sathiskumarjothi0/Beveridge-Large-C"  # Hugging Face repo ids of the released models
 PRO_MODEL = "sathiskumarjothi0/Beveridge-Pro-C"
+WEB_MODEL = "sathiskumarjothi0/Beveridge-Pro-C-Web"   # Beveridge-Pro-C plus web browsing steps (GPU)
 TYPES = ("noul", "choice", "score")
 
 
@@ -23,7 +24,7 @@ def _resolve(path_or_repo: str | Path) -> Path:
         return Path(snapshot_download(str(path_or_repo)))
     except (RepositoryNotFoundError, GatedRepoError) as e:
         raise RuntimeError(f"model '{path_or_repo}' is not available on Hugging Face (not released yet, private, or misspelled). "
-                           f"Released models: {PRO_MODEL} (GPU, ~60 GB) and {DEFAULT_MODEL} (laptop or GPU).") from e
+                           f"Released models: {DEFAULT_MODEL} (laptop or GPU), {PRO_MODEL} and {WEB_MODEL} (GPU, ~60 GB).") from e
 
 
 def _item(state: Any, questions: dict[str, dict]) -> dict:

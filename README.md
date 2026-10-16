@@ -11,6 +11,7 @@ calibrated probability for every option, without generating text, on your own ma
 [![Python](https://img.shields.io/pypi/pyversions/bev-decisions)](https://pypi.org/project/bev-decisions/)
 [![Beveridge-Large-C](https://img.shields.io/badge/%F0%9F%A4%97%20Model-Beveridge--Large--C-yellow)](https://huggingface.co/sathiskumarjothi0/Beveridge-Large-C)
 [![Beveridge-Pro-C](https://img.shields.io/badge/%F0%9F%A4%97%20Model-Beveridge--Pro--C-yellow)](https://huggingface.co/sathiskumarjothi0/Beveridge-Pro-C)
+[![Beveridge-Pro-C-Web](https://img.shields.io/badge/%F0%9F%A4%97%20Model-Beveridge--Pro--C--Web-yellow)](https://huggingface.co/sathiskumarjothi0/Beveridge-Pro-C-Web)
 [![Website](https://img.shields.io/badge/Website-bev.sjothi.com-23614f)](https://bev.sjothi.com/)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-sjothi-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/sjothi)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -26,13 +27,14 @@ your documents never leave your machines.
 |---|---|---|---|---|
 | [Beveridge-Large-C](https://huggingface.co/sathiskumarjothi0/Beveridge-Large-C) | 0.4B (ModernBERT-large base) | laptop CPU/GPU, edge boxes, any GPU | operations documents, logs and alerts, counting, amounts and limits, ticket routing, request safety | available |
 | [Beveridge-Pro-C](https://huggingface.co/sathiskumarjothi0/Beveridge-Pro-C) | 26B (Gemma 4 26B-A4B base) | one GPU with about 60 GB | knowledge-heavy decisions: contracts, finance topics, large intent sets, dates and payment status | available |
+| [Beveridge-Pro-C-Web](https://huggingface.co/sathiskumarjothi0/Beveridge-Pro-C-Web) | 26B (Gemma 4 26B-A4B base) | one GPU with about 60 GB | the next step of a browser agent, plus everything Beveridge-Pro-C does | available |
 
 
 ## Installation
 
 ```bash
 python -m pip install bev-decisions            # Beveridge-Large-C: laptop CPU or any GPU
-python -m pip install "bev-decisions[pro]"     # adds Beveridge-Pro-C: one GPU with about 60 GB
+python -m pip install "bev-decisions[pro]"     # adds Beveridge-Pro-C and Beveridge-Pro-C-Web: one GPU with about 60 GB
 ```
 
 `pip install beveridge` installs the same package under the models' name (`import beveridge` or `import bev`).
@@ -70,7 +72,7 @@ answers["urgent"]    # {"noul": P(yes), "probabilities": {"true": ..., "false": 
 answers["severity"]  # {"label": ..., "score": expected level, "confidence": ..., "probabilities": {...}}
 ```
 
-More in [examples/](https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi/tree/main/examples/): fourteen short scripts, from a first yes/no question to complete automations and a voice assistant.
+More in [examples/](https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi/tree/main/examples/): fifteen short scripts, from a first yes/no question to complete automations, a voice assistant and a browser agent step.
 
 ## Run with or without a GPU
 
@@ -150,6 +152,24 @@ python examples/14_voice_reply.py note.wav      # prints the transcript and deci
 Speech to text: faster-whisper (MIT). Text to speech: Kokoro-82M (Apache-2.0), stock voices only; the demo uses no real
 person's voice. Use cases outside the areas Beveridge was tested on are illustrations. Beveridge can make mistakes; keep a
 person in the loop for important decisions.
+
+## Web browsing
+
+**Beveridge-Pro-C-Web** (`bev.WEB_MODEL`) is Beveridge-Pro-C with web browsing added: it picks the next step of a browser
+agent (click, type, wait, done) and the element it applies to, with a probability for every option, and keeps
+Beveridge-Pro-C's results on documents. Next step on web pages from site types it never saw: 98.2% (Beveridge-Pro-C:
+49.4%). Live in the open-source browser loop [jev-ultrafast](https://github.com/browser-use/jev-ultrafast): hotel search
+3/3 (median 1.86 s) and Wikipedia 3/3 (median 4.88 s) on one H200.
+
+<a href="https://bev.sjothi.com/research/media/beveridge-web-browsing.mp4"><img src="https://bev.sjothi.com/research/media/beveridge-web-browsing.jpg" alt="Beveridge-Pro-C-Web browsing live: every step a typed decision (video)" width="640"></a>
+
+```python
+web = bev.load(bev.WEB_MODEL)       # one GPU with about 60 GB; downloads Gemma 4 from Google's repository and Beveridge's adapter
+```
+
+[examples/15_browser_step.py](https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi/blob/main/examples/15_browser_step.py)
+shows one step: the page and the goal in, the operation and the element out, unsure steps sent to a person. Keep a person
+in the loop for anything that buys, sends, deletes or signs.
 
 ## Decision primitives
 

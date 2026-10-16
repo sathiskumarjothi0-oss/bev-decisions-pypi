@@ -2,6 +2,7 @@
 
     import bev
     model = bev.load()                              # Beveridge-Large (laptop or GPU); bev.load(bev.PRO_MODEL) for Beveridge-Pro (GPU)
+    web = bev.load(bev.WEB_MODEL)                   # Beveridge-Pro-C-Web: Beveridge-Pro-C plus the next step of a browser agent (GPU)
     answers = model.decide(
         "Invoice INV-2291. Total: $9,412.50. Approval limit: $8,900.",
         {"over_limit": bev.presets.over_limit("$8,900")},
@@ -15,10 +16,10 @@ Up to 16 questions per call, up to 300 options per question, 4,096 input tokens.
 from . import presets
 from .evaluate import evaluate, evaluate_file
 from .gating import confidence, gate, value
-from .model import DEFAULT_MODEL, PRO_MODEL, Bev, load
+from .model import DEFAULT_MODEL, PRO_MODEL, WEB_MODEL, Bev, load
 from .router import Router
 from .schema import decide_as, questions_for
 
-__all__ = ["DEFAULT_MODEL", "PRO_MODEL", "Bev", "Router", "confidence", "decide_as", "evaluate", "evaluate_file", "gate", "load",
+__all__ = ["DEFAULT_MODEL", "PRO_MODEL", "WEB_MODEL", "Bev", "Router", "confidence", "decide_as", "evaluate", "evaluate_file", "gate", "load",
            "presets", "questions_for", "value"]
-__version__ = "0.2.4"
+__version__ = "0.2.5"

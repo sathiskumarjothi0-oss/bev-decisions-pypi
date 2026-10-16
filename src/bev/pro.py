@@ -5,7 +5,8 @@
     pro.decide(text, questions)
 
 A Beveridge-Pro folder holds bev_config.json (settings and calibration temperatures), the Gemma 4 model files and Beveridge's
-decision weights (adapter/). Everything is loaded from that one folder or Hugging Face repository.
+decision weights (adapter/). Everything is loaded from that one folder or Hugging Face repository. An adapter-only folder
+(Beveridge-Pro-C-Web) holds config.json with model_type "bev-pro" and base_model instead; Gemma 4 is then loaded by name.
 """
 
 from __future__ import annotations

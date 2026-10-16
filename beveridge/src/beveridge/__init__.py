@@ -10,5 +10,5 @@ from bev import *  # noqa: F403
 from bev import __all__ as _bev_all
 from bev import __version__ as bev_version  # noqa: F401
 
-__version__ = "0.2.4"
+__version__ = "0.2.5"
 __all__ = list(_bev_all)

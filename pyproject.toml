@@ -1,6 +1,6 @@
 [project]
 name = "bev-decisions"
-version = "0.2.4"
+version = "0.2.5"
 description = "Beveridge: System One decision models with open weights. Typed yes/no, choice and score decisions with calibrated probabilities"
 readme = "README.md"
 requires-python = ">=3.10"
