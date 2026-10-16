@@ -70,7 +70,7 @@ answers["urgent"]    # {"noul": P(yes), "probabilities": {"true": ..., "false": 
 answers["severity"]  # {"label": ..., "score": expected level, "confidence": ..., "probabilities": {...}}
 ```
 
-More in [examples/](https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi/tree/main/examples/): thirteen short scripts, from a first yes/no question to complete automations.
+More in [examples/](https://github.com/sathiskumarjothi0-oss/bev-decisions-pypi/tree/main/examples/): fourteen short scripts, from a first yes/no question to complete automations and a voice assistant.
 
 ## Run with or without a GPU
 
@@ -130,6 +130,26 @@ if "department" in sure:
 else:
     send_to_person(email_text)
 ```
+
+## Voice examples
+
+Beveridge reads text, so it pairs well with open speech models: a caller's voice note is transcribed, Beveridge answers
+typed questions about it, fixed reply rules turn the answers into a reply, and a text-to-speech model speaks it. Same model,
+different questions: the video shows 23 use cases (customer service, bank card line, IT helpdesk, agentic AI and
+multi-agent routing, emergency line, telecom, engineering, lab notes, drug discovery, robotics, autonomous car and more).
+
+<a href="https://bev.sjothi.com/research/media/beveridge-voice-examples.mp4"><img src="https://bev.sjothi.com/research/media/beveridge-voice-examples.jpg" alt="Beveridge Voice: 23 voice use cases (video)" width="640"></a>
+
+![Beveridge Voice architecture: voice note, Whisper speech to text, Beveridge typed decisions, fixed reply rules, Kokoro text to speech, spoken reply](https://bev.sjothi.com/research/media/beveridge-voice-architecture.png)
+
+```bash
+pip install bev-decisions faster-whisper kokoro soundfile
+python examples/14_voice_reply.py note.wav      # prints the transcript and decisions, writes reply.wav
+```
+
+Speech to text: faster-whisper (MIT). Text to speech: Kokoro-82M (Apache-2.0), stock voices only; the demo uses no real
+person's voice. Use cases outside the areas Beveridge was tested on are illustrations. Beveridge can make mistakes; keep a
+person in the loop for important decisions.
 
 ## Decision primitives
 
